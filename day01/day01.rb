@@ -6,4 +6,5 @@ puts content.split("\n")
             .split { |line| line.empty? }
             .map { |inventory| inventory.map(&:to_i) }
             .map(&:sum)
-            .max
+            .max(3)
+            .sum
