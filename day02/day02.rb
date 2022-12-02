@@ -27,10 +27,29 @@ MATCH_SCORE = {
   CZ: 3
 }
 
+ACTION_CHOICES = {
+  X: {
+    A: :Z,
+    B: :X,
+    C: :Y
+  },
+  Y: {
+    A: :X,
+    B: :Y,
+    C: :Z
+  },
+  Z: {
+    A: :Y,
+    B: :Z,
+    C: :X
+  }
+}
+
 puts content.split("\n")
-       .map { |actions| actions.split(" ").join }
-       .map { |actions| ACTION_SCORE[actions[1].to_sym] + MATCH_SCORE[actions.to_sym] }
-       .sum
+            .map { |actions| actions.split(" ").join }
+            .map { |actions| actions[0] + ACTION_CHOICES[actions[1].to_sym][actions[0].to_sym].to_s }
+            .map { |actions| ACTION_SCORE[actions[1].to_sym] + MATCH_SCORE[actions.to_sym] }
+            .sum
 
 
 
