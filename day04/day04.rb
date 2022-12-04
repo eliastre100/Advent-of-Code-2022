@@ -1,5 +1,6 @@
-content = File.read(ARGV[0])
 require 'set'
+
+content = File.read(ARGV[0])
 
 puts content.split("\n")
             .map { |group|
