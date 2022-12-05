@@ -10,9 +10,7 @@ class Deck
   end
 
   def move(qty, from, to)
-    qty.times do
-      @stacks[to - 1].push(@stacks[from - 1].pop)
-    end
+    @stacks[to - 1].push(*@stacks[from - 1].pop(qty))
   end
 
   def top_rows

@@ -1,5 +1,4 @@
 require_relative 'deck'
-require "awesome_print"
 
 content = File.read(ARGV[0]).split("\n\n")
 
