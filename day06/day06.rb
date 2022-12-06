@@ -1,7 +1,7 @@
 content = File.read(ARGV[0]).chars
 
-require "awesome_print"
+SEARCH_SIZE = 14
 
-ap(content.map.with_index do |_, index|
-  { tokens: content[index..(index + 3)], index: index }
-end.detect { |group| group[:tokens].uniq.size == 4 }[:index] + 4)
+puts(content.map.with_index do |_, index|
+  { tokens: content[index..(index + SEARCH_SIZE - 1)], index: index }
+end.detect { |group| group[:tokens].uniq.size == SEARCH_SIZE }[:index] + SEARCH_SIZE)
