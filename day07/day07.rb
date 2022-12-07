@@ -3,7 +3,7 @@ require_relative 'terminal'
 
 content = File.read(ARGV[0])
 
-filesystem = FileSystem.new
+filesystem = FileSystem.new(70000000)
 terminal = Terminal.new(filesystem)
 
 content.split("$ ")
@@ -13,5 +13,10 @@ content.split("$ ")
 
 filesystem.dump
 puts filesystem.select_folders { |folder| folder.size <= 100000 }
-             .map(&:size)
-             .sum
+               .map(&:size)
+               .sum
+
+required_space = 30000000 - filesystem.freespace
+puts filesystem.select_folders { |folder| folder.size >= required_space }
+             .sort { |a, b| a.size <=> b.size }
+             .first.size
