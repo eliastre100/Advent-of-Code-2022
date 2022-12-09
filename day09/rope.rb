@@ -1,15 +1,27 @@
 class Rope
   attr_reader :tail_positions, :head, :tail
 
-  def initialize
+  def initialize(children = 0)
     @head = { x: 0, y: 0 }
     @tail = { x: 0, y: 0 }
     @tail_positions = ["0-0"]
+    @child = ((children >= 1) ? self.class.new(children - 1) : nil)
   end
 
   def move(direction)
     method(direction.to_sym).call
     resolve_tail
+  end
+
+  def apply_vector(vector)
+    @head[:x] += vector[:x]
+    @head[:y] += vector[:y]
+    resolve_tail
+  end
+
+  def rope_tail
+    return self unless @child
+    @child.rope_tail
   end
 
   private
@@ -55,5 +67,6 @@ class Rope
     @tail[:x] += traction_vector[:x]
     @tail[:y] += traction_vector[:y]
     @tail_positions.push("#{tail[:x]}-#{tail[:y]}").uniq!
+    @child.apply_vector(traction_vector) if @child
   end
 end

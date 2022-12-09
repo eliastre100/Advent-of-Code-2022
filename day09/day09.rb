@@ -9,10 +9,11 @@ DIRECTIONS = {
   "D" => :down
 }
 
-rope = Rope.new
+rope = Rope.new(8)
 
 content.split("\n")
        .map { |instruction| instruction.split }
        .each { |instruction| instruction.last.to_i.times { rope.move(DIRECTIONS[instruction.first]) } }
 
 pp rope.tail_positions.size
+pp rope.rope_tail.tail_positions.size
