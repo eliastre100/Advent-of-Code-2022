@@ -14,3 +14,4 @@ content.split("\n")
        .each { |instructions| cpu.call(instructions[0], instructions[1]) }
 
 pp strengths.sum
+cpu.crt.print

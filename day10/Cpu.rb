@@ -1,5 +1,7 @@
+require_relative 'crt'
+
 class Cpu
-  attr_reader :x
+  attr_reader :x, :crt
 
   def initialize(steps, &strengths_callback)
     @x = 1
@@ -7,6 +9,7 @@ class Cpu
     @target_cycle = 20
     @steps = steps
     @strengths_callback = strengths_callback
+    @crt = Crt.new
   end
 
   def call(instruction, arguments)
@@ -15,6 +18,7 @@ class Cpu
     method(instruction.to_sym).call(arguments.to_i)
     call_cycles = previous_cycle..@cycle
 
+    @crt.draw((previous_cycle..(@cycle - 1)), previous_x)
     if @cycle == @target_cycle
       trigger_callback(@x)
     elsif call_cycles.include?(@target_cycle)
