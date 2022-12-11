@@ -16,13 +16,12 @@ content.split("\n\n")
 
   targets = {
     true: monkey_definition[4].scan(/[0-9]+/).first.to_i,
-    false: monkey_definition[5].scan(/[0-9]+/).first.to_i,
-
+    false: monkey_definition[5].scan(/[0-9]+/).first.to_i
   }
 
   pack.add_monkey(items, inspection_process, target_selection, targets)
 end
 
-20.times { pack.round }
+10000.times { pack.round }
 
 pp pack.monkeys.map { |monkey| monkey[:activity] }.max(2).inject(&:*)

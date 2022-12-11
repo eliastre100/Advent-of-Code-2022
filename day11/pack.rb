@@ -28,8 +28,14 @@ class Pack
 
   def throw_item(monkey, item)
     item = monkey[:inspection_process].call(item)
-    item = (item.to_f / 3).floor
+    #item = (item.to_f / 3).floor
+    item = item % simplifier
     target = monkey[:targets][(item % monkey[:target_selection] == 0).to_s.to_sym]
     monkeys[target][:items].push(item)
+  end
+
+  def simplifier
+    @simplifier ||= @monkeys.map { |monkey| monkey[:target_selection] }
+                            .inject(&:*)
   end
 end
