@@ -9,7 +9,6 @@ class Pair
   end
 
   def sorted?
-    puts "== Pair #{@index} =="
     @left.sorted?(@right)
   end
 end

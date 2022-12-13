@@ -20,15 +20,12 @@ class List
   end
 
   def sorted?(other, idx = 0)
-    puts "- Compare #{@values} vs #{other.values}" if idx == 0
     return nil if @values[idx].nil? && other.values[idx].nil?
     return true if @values[idx].nil?
     return false if other.values[idx].nil?
 
     local_value = @values[idx]
     other_value = other.values[idx]
-
-    puts "compare #{local_value} vs #{other_value}"
 
     if local_value.is_a?(Integer) && other_value.is_a?(Integer)
       return false if local_value > other_value
