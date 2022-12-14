@@ -26,7 +26,7 @@ class Cave
   end
 
   def drop_sand(x, y)
-    if y > lowest_rock
+    if y > lowest_rock || !free_space_at?(x, y)
       false
     elsif free_space_at?(x, y + 1)
       drop_sand(x, y + 1)
@@ -40,7 +40,7 @@ class Cave
     end
   end
 
-  private
+  #private
 
   def place_at(x, y, value)
     @map[y] ||= {}
@@ -56,7 +56,7 @@ class Cave
   end
 
   def free_space_at?(x, y)
-    (@map[y] || {})[x].nil?
+    (@map[y] || {})[x].nil? && y != lowest_rock
   end
 
   def rock_at?(x, y)
@@ -64,6 +64,6 @@ class Cave
   end
 
   def lowest_rock
-    @map.keys.max
+    @lowest_rock ||= @map.keys.max + 2
   end
 end

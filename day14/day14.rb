@@ -12,8 +12,8 @@ content.split("\n").each do |line|
   end)
 end
 
-sand_droped = 0
+sand_dropped = 0
 while cave.drop_sand(500, 0)
-  sand_droped += 1
+  sand_dropped += 1
 end
-pp sand_droped
+pp sand_dropped
