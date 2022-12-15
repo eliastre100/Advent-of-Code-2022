@@ -11,11 +11,14 @@ class Sensor
     self
   end
 
-  def positions_covered_at(y)
+  def positions_covered_at(y, min: -Float::INFINITY, max: Float::INFINITY)
     distance = manhattan(@position, @beacons.first) - (@position[:y] - y).abs
+    #return (0..0) if distance < 0
     c1 = @position[:x] - distance
     c2 = @position[:x] + distance
-    (c1..c2).to_a
+    c1 = min if c1 < min
+    c2 = max if c2 > max
+    c1..c2
   end
 
   def reject_beacon_positions(positions)
