@@ -1,5 +1,6 @@
 require_relative 'valve'
 require_relative 'itinerary'
+require_relative 'double_itinerary'
 
 content = File.read(ARGV[0])
 
@@ -25,5 +26,5 @@ end
 itinerary = Itinerary.new(valves.values)
 pp itinerary.generate_itinerary(valves["AA"], 30)
 
-#!1788
-#1792
+itinerary = DoubleItinerary.new(valves.values)
+pp itinerary.generate_itinerary(valves["AA"], 26)
